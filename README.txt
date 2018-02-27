@@ -1,15 +1,15 @@
 # HashMaker
-¼ÆËãÎÄ¼ş»òÕß×Ö·û´®µÄ¹şÏ£Öµ£¬Ö§³ÖCRC32¡¢MD¡¢SHA-1¡¢SHA-2¡¢SHA-3¶àÖÖËã·¨£¬½èÖú»º³åÇøÖ§³Ö³¬¹ı2GÒÔÉÏµÄ´óĞÍÎÄ¼ş£¬Ö§³Ö¶àÎÄ¼ş¶àÏß³ÌÔËËã
+è®¡ç®—æ–‡ä»¶æˆ–è€…å­—ç¬¦ä¸²çš„å“ˆå¸Œå€¼ï¼Œæ”¯æŒCRC32ã€MDã€SHA-1ã€SHA-2ã€SHA-3å¤šç§ç®—æ³•ï¼Œå€ŸåŠ©ç¼“å†²åŒºæ”¯æŒè¶…è¿‡2Gä»¥ä¸Šçš„å¤§å‹æ–‡ä»¶ï¼Œæ”¯æŒå¤šæ–‡ä»¶å¤šçº¿ç¨‹è¿ç®—
 
-Ê¹ÓÃÊ¾Àı£º
+# ä½¿ç”¨ç¤ºä¾‹
 /**
- * Ò»¸öÎÄ¼şÖ´ĞĞµÄÊ¾Àı
+ * ä¸€ä¸ªæ–‡ä»¶æ‰§è¡Œçš„ç¤ºä¾‹
  */
 @Test
 public void fileDemo1() {
-	//1.´´½¨ÎÄ¼ş¶ÔÏó
+	//1.åˆ›å»ºæ–‡ä»¶å¯¹è±¡
 	File file = new File("D:\\1.png");
-	//2.×¼±¸ĞèÒªÖ´ĞĞµÄ·½·¨¼¯ºÏ£¬Ö§³ÖµÄÀàĞÍÔÚAlgorithm½Ó¿ÚÖĞ
+	//2.å‡†å¤‡éœ€è¦æ‰§è¡Œçš„æ–¹æ³•é›†åˆï¼Œæ”¯æŒçš„ç±»å‹åœ¨Algorithmæ¥å£ä¸­
 	Set<String> set = Set.of(
 			Algorithm.CRC32, Algorithm.CRC32C,
 			Algorithm.MD2, Algorithm.MD5,
@@ -17,32 +17,32 @@ public void fileDemo1() {
 			Algorithm.SHA_224, Algorithm.SHA_256, Algorithm.SHA_384, Algorithm.SHA_512, Algorithm.SHA_512_224, Algorithm.SHA_512_256,
 			Algorithm.SHA3_224, Algorithm.SHA3_256, Algorithm.SHA3_384, Algorithm.SHA3_512
 	);
-	//3.´´½¨ÕªÒª¶ÔÏó£¬´«ÈëÕªÒªÀàĞÍ£¬´óĞ¡Ğ´Êä³ö£¬ÎÄ¼ş
+	//3.åˆ›å»ºæ‘˜è¦å¯¹è±¡ï¼Œä¼ å…¥æ‘˜è¦ç±»å‹ï¼Œå¤§å°å†™è¾“å‡ºï¼Œæ–‡ä»¶
 	MsgDigestFile msgDigestFile = new MsgDigestFile(set, false, file);
-	//5.ÉèÖÃ»º³åÇøµÄ´óĞ¡£¬µ¥Î»×Ö½Ú£¬Ä¬ÈÏ1MB£¬Ò»´ÎĞÔ¶ÁÈ¡1MB£¬·Ö¶Î´¦Àí´óĞÍÎÄ¼ş
+	//5.è®¾ç½®ç¼“å†²åŒºçš„å¤§å°ï¼Œå•ä½å­—èŠ‚ï¼Œé»˜è®¤1MBï¼Œä¸€æ¬¡æ€§è¯»å–1MBï¼Œåˆ†æ®µå¤„ç†å¤§å‹æ–‡ä»¶
 	msgDigestFile.setFileCacheSize(10485760);//10MB
-	msgDigestFile.getFileSize();//ÎÄ¼şµÄ´óĞ¡£¬µ¥Î»×Ö½Ú£¬long
-	msgDigestFile.getSurplusFileSize();//Ê£ÓàÎ´¶ÁÈ¡µÄ×Ö½Ú´óĞ¡£¬µ¥Î»×Ö½Ú£¬long
-	//6.Ö´ĞĞ£¬½ÓÊÕ½á¹û£¬key=Ëã·¨ÀàĞÍ£¬value=¼ÆËãµÄÕªÒªÖµ
+	msgDigestFile.getFileSize();//æ–‡ä»¶çš„å¤§å°ï¼Œå•ä½å­—èŠ‚ï¼Œlong
+	msgDigestFile.getSurplusFileSize();//å‰©ä½™æœªè¯»å–çš„å­—èŠ‚å¤§å°ï¼Œå•ä½å­—èŠ‚ï¼Œlong
+	//6.æ‰§è¡Œï¼Œæ¥æ”¶ç»“æœï¼Œkey=ç®—æ³•ç±»å‹ï¼Œvalue=è®¡ç®—çš„æ‘˜è¦å€¼
 	Map<String, String> map = msgDigestFile.hash();
-	//7.Êä³ö½á¹û
-	map.forEach((key, value) -> System.out.println(key + "£º" + value));
-	String string = msgDigestFile.toString();//×Ö·û´®µÄ½á¹û£¬°üÀ¨ÎÄ¼şÂ·¾¶£¬ÎÄ¼ş´óĞ¡£¬ºÍ¸÷ÎÄ¼şÕªÒª½á¹ûĞÅÏ¢£¨ÎŞĞò£©£¬»»ĞĞÊä³ö
+	//7.è¾“å‡ºç»“æœ
+	map.forEach((key, value) -> System.out.println(key + "ï¼š" + value));
+	String string = msgDigestFile.toString();//å­—ç¬¦ä¸²çš„ç»“æœï¼ŒåŒ…æ‹¬æ–‡ä»¶è·¯å¾„ï¼Œæ–‡ä»¶å¤§å°ï¼Œå’Œå„æ–‡ä»¶æ‘˜è¦ç»“æœä¿¡æ¯ï¼ˆæ— åºï¼‰ï¼Œæ¢è¡Œè¾“å‡º
 	System.out.println(string);
 }
 
 /**
- * ¶àÎÄ¼ş£¬¶àÏß³ÌµÄÊ¾Àı
+ * å¤šæ–‡ä»¶ï¼Œå¤šçº¿ç¨‹çš„ç¤ºä¾‹
  */
 @Test
 public void fileDemo2() {
-	//1.´´½¨ÎÄ¼ş¼¯ºÏ
+	//1.åˆ›å»ºæ–‡ä»¶é›†åˆ
 	List<File> fileList = List.of(
 			new File("D:\\1.png"),
 			new File("D:\\2.png"),
 			new File("D:\\3.png")
 	);
-	//2.×¼±¸ĞèÒªÖ´ĞĞµÄ·½·¨¼¯ºÏ£¬Ö§³ÖµÄÀàĞÍÔÚAlgorithm½Ó¿ÚÖĞ
+	//2.å‡†å¤‡éœ€è¦æ‰§è¡Œçš„æ–¹æ³•é›†åˆï¼Œæ”¯æŒçš„ç±»å‹åœ¨Algorithmæ¥å£ä¸­
 	Set<String> set = Set.of(
 			Algorithm.CRC32, Algorithm.CRC32C,
 			Algorithm.MD2, Algorithm.MD5,
@@ -50,30 +50,30 @@ public void fileDemo2() {
 			Algorithm.SHA_224, Algorithm.SHA_256, Algorithm.SHA_384, Algorithm.SHA_512, Algorithm.SHA_512_224, Algorithm.SHA_512_256,
 			Algorithm.SHA3_224, Algorithm.SHA3_256, Algorithm.SHA3_384, Algorithm.SHA3_512
 	);
-	//3.´´½¨¶àÏß³ÌµÄÕªÒª¶ÔÏó£¬´«ÈëÕªÒªÀàĞÍ£¬´óĞ¡Ğ´Êä³ö£¬ÎÄ¼şlist¼¯ºÏ
+	//3.åˆ›å»ºå¤šçº¿ç¨‹çš„æ‘˜è¦å¯¹è±¡ï¼Œä¼ å…¥æ‘˜è¦ç±»å‹ï¼Œå¤§å°å†™è¾“å‡ºï¼Œæ–‡ä»¶listé›†åˆ
 	MsgDigestFiles msgDigestFiles = new MsgDigestFiles(set, false, fileList);
-	//4.»ñÈ¡½á¹û
+	//4.è·å–ç»“æœ
 	Map<File, Map<String, String>> map = msgDigestFiles.hash();
-	//5.Êä³ö½á¹û
+	//5.è¾“å‡ºç»“æœ
 	map.forEach((f, m) -> {
-		System.out.println("ÎÄ¼ş£º" + f.getAbsolutePath());
-		System.out.println("´óĞ¡£º" + f.length());
-		m.forEach((k, v) -> System.out.println(k + "£º" + v));
+		System.out.println("æ–‡ä»¶ï¼š" + f.getAbsolutePath());
+		System.out.println("å¤§å°ï¼š" + f.length());
+		m.forEach((k, v) -> System.out.println(k + "ï¼š" + v));
 	});
 	System.out.println("======");
-	String string = msgDigestFiles.toString();//×Ö·û´®µÄ½á¹û£¬°üÀ¨ÎÄ¼şÂ·¾¶£¬ÎÄ¼ş´óĞ¡£¬ºÍ¸÷ÎÄ¼şÕªÒª½á¹ûĞÅÏ¢£¨ÎŞĞò£©£¬»»ĞĞÊä³ö
+	String string = msgDigestFiles.toString();//å­—ç¬¦ä¸²çš„ç»“æœï¼ŒåŒ…æ‹¬æ–‡ä»¶è·¯å¾„ï¼Œæ–‡ä»¶å¤§å°ï¼Œå’Œå„æ–‡ä»¶æ‘˜è¦ç»“æœä¿¡æ¯ï¼ˆæ— åºï¼‰ï¼Œæ¢è¡Œè¾“å‡º
 	System.out.println(string);
 }
 
 
 /**
- * ÎÄ±¾µÄÊ¾Àı
+ * æ–‡æœ¬çš„ç¤ºä¾‹
  */
 @Test
 public void stringDemo() {
-	//1.´´½¨×Ö·û´®
-	String string = "Êı¾İÕªÒªËã·¨ÊÇÃÜÂëÑ§Ëã·¨ÖĞ·Ç³£ÖØÒªµÄÒ»¸ö·ÖÖ§£¬ËüÍ¨¹ı¶ÔËùÓĞÊı¾İÌáÈ¡Ö¸ÎÆĞÅÏ¢ÒÔÊµÏÖÊı¾İÇ©Ãû¡¢Êı¾İÍêÕûĞÔĞ£ÑéµÈ¹¦ÄÜ£¬ÓÉÓÚÆä²»¿ÉÄæĞÔ£¬ÓĞÊ±ºò»á±»ÓÃ×öÃô¸ĞĞÅÏ¢µÄ¼ÓÃÜ¡£Êı¾İÕªÒªËã·¨Ò²±»³ÆÎª¹şÏ££¨Hash£©Ëã·¨»òÉ¢ÁĞËã·¨";
-	//2.×¼±¸ĞèÒªÖ´ĞĞµÄ·½·¨¼¯ºÏ£¬Ö§³ÖµÄÀàĞÍÔÚAlgorithm½Ó¿ÚÖĞ
+	//1.åˆ›å»ºå­—ç¬¦ä¸²
+	String string = "æ•°æ®æ‘˜è¦ç®—æ³•æ˜¯å¯†ç å­¦ç®—æ³•ä¸­éå¸¸é‡è¦çš„ä¸€ä¸ªåˆ†æ”¯ï¼Œå®ƒé€šè¿‡å¯¹æ‰€æœ‰æ•°æ®æå–æŒ‡çº¹ä¿¡æ¯ä»¥å®ç°æ•°æ®ç­¾åã€æ•°æ®å®Œæ•´æ€§æ ¡éªŒç­‰åŠŸèƒ½ï¼Œç”±äºå…¶ä¸å¯é€†æ€§ï¼Œæœ‰æ—¶å€™ä¼šè¢«ç”¨åšæ•æ„Ÿä¿¡æ¯çš„åŠ å¯†ã€‚æ•°æ®æ‘˜è¦ç®—æ³•ä¹Ÿè¢«ç§°ä¸ºå“ˆå¸Œï¼ˆHashï¼‰ç®—æ³•æˆ–æ•£åˆ—ç®—æ³•";
+	//2.å‡†å¤‡éœ€è¦æ‰§è¡Œçš„æ–¹æ³•é›†åˆï¼Œæ”¯æŒçš„ç±»å‹åœ¨Algorithmæ¥å£ä¸­
 	Set<String> set = Set.of(
 			Algorithm.CRC32, Algorithm.CRC32C,
 			Algorithm.MD2, Algorithm.MD5,
@@ -81,14 +81,14 @@ public void stringDemo() {
 			Algorithm.SHA_224, Algorithm.SHA_256, Algorithm.SHA_384, Algorithm.SHA_512, Algorithm.SHA_512_224, Algorithm.SHA_512_256,
 			Algorithm.SHA3_224, Algorithm.SHA3_256, Algorithm.SHA3_384, Algorithm.SHA3_512
 	);
-	//3.´´½¨ÕªÒª¶ÔÏó£¬´«ÈëÕªÒªÀàĞÍ£¬´óĞ¡Ğ´Êä³ö£¬ÎÄ¼ş
+	//3.åˆ›å»ºæ‘˜è¦å¯¹è±¡ï¼Œä¼ å…¥æ‘˜è¦ç±»å‹ï¼Œå¤§å°å†™è¾“å‡ºï¼Œæ–‡ä»¶
 	MsgDigestString msgDigestString = new MsgDigestString(set, false, string);
-	//4.ÉèÖÃ×Ö·û´®µÄ×Ö·û¼¯£¬Ä¬ÈÏutf-8£¬²»Ö§³ÖµÄ×Ö·û¼¯Ò²Îªutf-8
+	//4.è®¾ç½®å­—ç¬¦ä¸²çš„å­—ç¬¦é›†ï¼Œé»˜è®¤utf-8ï¼Œä¸æ”¯æŒçš„å­—ç¬¦é›†ä¹Ÿä¸ºutf-8
 	msgDigestString.setCharset("big5");
-	//5.»ñÈ¡½á¹û
+	//5.è·å–ç»“æœ
 	Map<String, String> map = msgDigestString.hash();
-	//6.Êä³ö
-	map.forEach((key, value) -> System.out.println(key + "£º" + value));
-	string = msgDigestString.toString();//×Ö·û´®µÄ½á¹û£¬°üÀ¨ÎÄ¼şÂ·¾¶£¬ÎÄ¼ş´óĞ¡£¬ºÍ¸÷ÎÄ¼şÕªÒª½á¹ûĞÅÏ¢£¨ÎŞĞò£©£¬»»ĞĞÊä³ö
+	//6.è¾“å‡º
+	map.forEach((key, value) -> System.out.println(key + "ï¼š" + value));
+	string = msgDigestString.toString();//å­—ç¬¦ä¸²çš„ç»“æœï¼ŒåŒ…æ‹¬æ–‡ä»¶è·¯å¾„ï¼Œæ–‡ä»¶å¤§å°ï¼Œå’Œå„æ–‡ä»¶æ‘˜è¦ç»“æœä¿¡æ¯ï¼ˆæ— åºï¼‰ï¼Œæ¢è¡Œè¾“å‡º
 	System.out.println(string);
 }
